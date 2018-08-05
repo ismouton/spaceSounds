@@ -1,0 +1,73 @@
+*::before,
+*::after,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: grey;
+}
+
+table { 
+  width: 100vmax;
+  height: 58vmax;
+  /* border-collapse: collapse; */
+  border-spacing: 1px;
+  border-radius: 3px;
+  overflow: hidden;
+  animation: colorShift 10s infinite linear alternate;
+}
+
+td {
+  background-color: black;
+  transition: background-color .5s;
+}
+
+@keyframes colorShift {
+  from {
+    filter: hue-rotate(0deg)
+  }
+  to {
+    filter: hue-rotate(359deg)
+  }
+}
+
+td.on {
+  background-color: magenta;
+}
+
+.controls {
+  position: absolute;
+  z-index: 1000;
+}
+
+.controls button {
+  padding: 5px 11px;
+  margin: 6px;
+}
+
+.button {
+  background-color: green;
+  padding: 6px 11px;
+  color: white;
+  margin: 10px 0px 10px 10px;
+  display: inline-block;
+  border-radius: 3px;
+  border: thin solid rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: background-color .5s;
+}
+
+.button:hover {
+  background-color: rgb(15, 153, 15);
+}
+
+.button.stop {
+  display: none;
+}

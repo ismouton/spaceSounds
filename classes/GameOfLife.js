@@ -1,14 +1,14 @@
 import DataTable from './DataTable.js'
 
 export default class GameOfLife {
-  constructor (x,y) {
+  constructor (x, y) {
     this._tables = Array(2).fill(null);
     this._tables = this._tables.map(undefined=>new DataTable(x,y));
     this._iteration = 0;
     this._numberOfRows = y;
     this._numberOfColumns = x;
 
-    // B3/S23
+    /* B36/S23 - Highlife ruleset */
     this.rules = {
       S: [
         /*0*/ false,
@@ -33,36 +33,10 @@ export default class GameOfLife {
         /*8*/ false,
       ]
     };
-
-    // B3678/S34678
-    // this.rules = {
-    //   S: [
-    //     /*0*/ false,
-    //     /*1*/ false,
-    //     /*2*/ false,
-    //     /*3*/ true,
-    //     /*4*/ true,
-    //     /*5*/ false,
-    //     /*6*/ true,
-    //     /*7*/ true,
-    //     /*8*/ true,
-    //   ],
-    //   B: [
-    //     /*0*/ false,
-    //     /*1*/ false,
-    //     /*2*/ false,
-    //     /*3*/ true,
-    //     /*4*/ false,
-    //     /*5*/ false,
-    //     /*6*/ true,
-    //     /*7*/ true,
-    //     /*8*/ true,
-    //   ]
-    // };
   }
 
-  toggle (x, y) {
-    return this._sourceBoard.toggle(x,y);
+  setCell (x, y, state) {
+    this._sourceBoard.setCell(x,y,state)
   }
 
   _countNeighbors(x, y) {
@@ -79,15 +53,14 @@ export default class GameOfLife {
       {x:  1, y:  0, weight: 1},
     ];
 
-    const neighborHood = neighborHoodMap.map((item) => {
+    return neighborHoodMap.map((item) => {
       if (cur.getCell(x + item.x, y + item.y)) {
         return item.weight;
       } else {
         return 0;
       }
-    });
-
-    return neighborHood.reduce((a,b)=>a+b);
+    })
+    .reduce((a,b)=>a+b);
   }
 
   _applyRules () {

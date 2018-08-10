@@ -99,14 +99,11 @@
     playNote (key) {
       this.oscillators[key] = this.audioCtx.createOscillator();
       this.gains[key] = this.audioCtx.createGain();
-
       this.oscillators[key].type = "sine";
       this.oscillators[key].frequency.value = this.noteArray[key];
-
       this.gains[key].gain.value = 0.03;
       this.oscillators[key].connect(this.gains[key]);
       this.gains[key].connect(this.audioCtx.destination)
-
       this.oscillators[key].start();
     };
 
